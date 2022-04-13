@@ -8,7 +8,11 @@ const bodyParser = require("body-parser");
 const expressSession = require("express-session")({
   secret: "secret",
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    maxAge: 60000,
+  },
 });
 
 app.use(bodyParser.json());
@@ -16,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSession);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log("App listing on port" + port));
+app.listen(port, () => console.log("App listening on port" + port));
 
 /* PASSPORT SETUP */
 const passport = require("passport");
